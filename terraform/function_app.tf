@@ -1,0 +1,31 @@
+resource "azurerm_storage_account" "sa_fa" {
+  name                     = "safa${var.project_name}"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+resource "azurerm_service_plan" "sp_fa" {
+  name                = "sp-fa-${var.project_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "Y1"
+}
+
+resource "azurerm_linux_function_app" "fa" {
+  name                = "fa-${var.project_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+
+  storage_account_name       = azurerm_storage_account.sa_fa.name
+  storage_account_access_key = azurerm_storage_account.sa_fa.primary_access_key
+  service_plan_id            = azurerm_service_plan.sp_fa.id
+
+  site_config {
+    application_stack {
+        node_version=20
+    }
+  }
+}
