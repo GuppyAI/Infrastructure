@@ -14,6 +14,7 @@ resource "azurerm_cognitive_deployment" "cd" {
   model {
     format  = "OpenAI"
     name    = "gpt-35-turbo"
+    version = "0301"
   }
 
   scale {

@@ -18,9 +18,23 @@ resource "azurerm_servicebus_queue_authorization_rule" "sb_q_ingress_ar_send" {
   send   = true
 }
 
+resource "azurerm_servicebus_queue_authorization_rule" "sb_q_ingress_ar_listen" {
+  name     = "sb-q-ingress-ar-listen-${var.project_name}"
+  queue_id = azurerm_servicebus_queue.sb_q_ingress.id
+
+  listen   = true
+}
+
 resource "azurerm_servicebus_queue" "sb_q_sms-egress" {
   name         = "sb-q-sms-egress-${var.project_name}"
   namespace_id = azurerm_servicebus_namespace.sb_ns.id
+}
+
+resource "azurerm_servicebus_queue_authorization_rule" "sb_q_sms-egress_ar_send" {
+  name     = "sb-q-sms-egress-ar-send-${var.project_name}"
+  queue_id = azurerm_servicebus_queue.sb_q_sms-egress.id
+
+  send   = true
 }
 
 resource "azurerm_servicebus_queue_authorization_rule" "sb_q_sms-egress_ar_listen" {

@@ -3,7 +3,6 @@ resource "azurerm_cosmosdb_account" "cdb_a" {
     resource_group_name = azurerm_resource_group.rg.name
     location = azurerm_resource_group.rg.location
     offer_type = "Standard"
-    public_network_access_enabled = false
     capacity {
       total_throughput_limit = 1000
     }
@@ -29,12 +28,9 @@ resource "azurerm_cosmosdb_sql_database" "cdb_sqldb" {
 }
 
 resource "azurerm_cosmosdb_sql_container" "cdb_sqldb_c_chats" {
-    name = "cdb-sqldb-c-chats${var.project_name}"
+    name = "cdb-sqldb-c-chats-${var.project_name}"
     resource_group_name = azurerm_resource_group.rg.name
     account_name = azurerm_cosmosdb_account.cdb_a.name
     database_name = azurerm_cosmosdb_sql_database.cdb_sqldb.name
-    partition_key_paths = [ "/user_id" ]
-    unique_key {
-        paths = ["/user_id"]
-    }
+    partition_key_paths = [ "/id" ]
 }

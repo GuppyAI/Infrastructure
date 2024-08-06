@@ -10,11 +10,11 @@ resource "azurerm_service_plan" "sp_fa" {
   name                = "sp-fa-${var.project_name}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  os_type             = "Linux"
+  os_type             = "Windows"
   sku_name            = "Y1"
 }
 
-resource "azurerm_linux_function_app" "fa" {
+resource "azurerm_windows_function_app" "fa" {
   name                = "fa-${var.project_name}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
@@ -23,9 +23,25 @@ resource "azurerm_linux_function_app" "fa" {
   storage_account_access_key = azurerm_storage_account.sa_fa.primary_access_key
   service_plan_id            = azurerm_service_plan.sp_fa.id
 
+  app_settings = {
+    "INGRESS_QUEUE" : azurerm_servicebus_queue.sb_q_ingress.name
+    "SERVICEBUS_CONNECTION_INGRESS" : azurerm_servicebus_queue_authorization_rule.sb_q_ingress_ar_listen.primary_connection_string
+    "EGRESS_QUEUE" : azurerm_servicebus_queue.sb_q_sms-egress.name
+    "SERVICEBUS_CONNECTION_EGRESS" : azurerm_servicebus_queue_authorization_rule.sb_q_sms-egress_ar_send.primary_connection_string
+    "COSMOSDB_CONNECTION": azurerm_cosmosdb_account.cdb_a.primary_sql_connection_string
+    "COSMOSDB_DATABASE": azurerm_cosmosdb_sql_database.cdb_sqldb.name
+    "COSMOSDB_CONTAINER": azurerm_cosmosdb_sql_container.cdb_sqldb_c_chats.name
+    "OPENAI_ENDPOINT": azurerm_cognitive_account.ca.endpoint
+    "OPENAI_KEY": azurerm_cognitive_account.ca.primary_access_key
+    "OPENAI_VERSION": "2024-05-01-preview"
+    "OPENAI_DEPLOYMENT": azurerm_cognitive_deployment.cd.name
+    "OPENAI_SYSTEM_PROMPT": "You are a helpful assistant that helps people with their tasks. You are very friendly and always willing to help. You are a good listener and always try to help people solve their problems. You are a good friend."
+    "OPENAI_MAX_TOKENS": 160
+  }
+
   site_config {
     application_stack {
-        node_version=20
+      node_version = "~20"
     }
   }
 }
