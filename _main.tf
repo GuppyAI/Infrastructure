@@ -42,7 +42,11 @@ variable "system_promt" {
 
 variable "reset_message" {
   type    = string
-  default = "<Chat has been reset>\n\nHi I'm Guppy-AI how can I help you today?"
+  default = <<EOF
+  <Chat has been reset>
+  
+  Hi I'm Guppy-AI how can I help you today?
+  EOF
 }
 
 variable "function_deploy_zip" {
