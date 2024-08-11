@@ -39,7 +39,7 @@ resource "azurerm_windows_function_app" "fa" {
     "OPENAI_DEPLOYMENT" : azurerm_cognitive_deployment.cd.name
     "OPENAI_SYSTEM_PROMPT" : var.system_promt
     "OPENAI_MAX_TOKENS" : 50
-    "WEBSITE_RUN_FROM_PACKAGE" : var.var.function_deploy_zip? "1" : "0"
+    "WEBSITE_RUN_FROM_PACKAGE" : var.function_deploy_zip? "1" : "0"
     "RESET_MESSAGE" : var.reset_message
   }
 
