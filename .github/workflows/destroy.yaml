@@ -6,6 +6,8 @@ jobs:
   destroy:
     name: Terraform Destroy
     runs-on: ubuntu-latest
+    env:
+      ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2

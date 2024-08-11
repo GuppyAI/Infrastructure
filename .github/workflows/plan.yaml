@@ -8,6 +8,8 @@ jobs:
   plan:
     name: Terraform Plan
     runs-on: ubuntu-latest
+    env:
+      ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2

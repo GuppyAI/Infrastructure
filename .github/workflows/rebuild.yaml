@@ -6,6 +6,8 @@ on:
 jobs:
   destroy:
     runs-on: ubuntu-latest
+    env:
+      ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/destry
