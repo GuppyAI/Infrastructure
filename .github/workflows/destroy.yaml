@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Download latest Release
-        run: wget "${{env.RELEASE_FILE}}" -O /tmp/app.zip
+        run: wget "${{vars.RELEASE_FILE}}" -O /tmp/app.zip
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
