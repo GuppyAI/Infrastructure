@@ -1,11 +1,11 @@
 resource "azurerm_cognitive_account" "ca" {
-  name                = "ca-${var.project_name}"
-  location            = "francecentral"
-  resource_group_name = azurerm_resource_group.rg.name
-  kind                = "OpenAI"
-  sku_name            = "S0"
+  name                          = "ca-${var.project_name}"
+  location                      = "francecentral"
+  resource_group_name           = azurerm_resource_group.rg.name
+  kind                          = "OpenAI"
+  sku_name                      = "S0"
   public_network_access_enabled = true
-  custom_subdomain_name = var.project_name
+  custom_subdomain_name         = var.project_name
 }
 
 resource "azurerm_cognitive_deployment" "cd" {

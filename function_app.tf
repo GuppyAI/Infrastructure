@@ -30,17 +30,17 @@ resource "azurerm_windows_function_app" "fa" {
     "SERVICEBUS_CONNECTION_INGRESS" : azurerm_servicebus_queue_authorization_rule.sb_q_ingress_ar_listen.primary_connection_string
     "EGRESS_QUEUE" : azurerm_servicebus_queue.sb_q_sms-egress.name
     "SERVICEBUS_CONNECTION_EGRESS" : azurerm_servicebus_queue_authorization_rule.sb_q_sms-egress_ar_send.primary_connection_string
-    "COSMOSDB_CONNECTION": azurerm_cosmosdb_account.cdb_a.primary_sql_connection_string
-    "COSMOSDB_DATABASE": azurerm_cosmosdb_sql_database.cdb_sqldb.name
-    "COSMOSDB_CONTAINER": azurerm_cosmosdb_sql_container.cdb_sqldb_c_chats.name
-    "OPENAI_ENDPOINT": azurerm_cognitive_account.ca.endpoint
-    "OPENAI_KEY": azurerm_cognitive_account.ca.primary_access_key
-    "OPENAI_VERSION": "2024-05-01-preview"
-    "OPENAI_DEPLOYMENT": azurerm_cognitive_deployment.cd.name
-    "OPENAI_SYSTEM_PROMPT": var.system_promt
-    "OPENAI_MAX_TOKENS": 50
-    "WEBSITE_RUN_FROM_PACKAGE": 1
-    "RESET_MESSAGE": var.reset_message
+    "COSMOSDB_CONNECTION" : azurerm_cosmosdb_account.cdb_a.primary_sql_connection_string
+    "COSMOSDB_DATABASE" : azurerm_cosmosdb_sql_database.cdb_sqldb.name
+    "COSMOSDB_CONTAINER" : azurerm_cosmosdb_sql_container.cdb_sqldb_c_chats.name
+    "OPENAI_ENDPOINT" : azurerm_cognitive_account.ca.endpoint
+    "OPENAI_KEY" : azurerm_cognitive_account.ca.primary_access_key
+    "OPENAI_VERSION" : "2024-05-01-preview"
+    "OPENAI_DEPLOYMENT" : azurerm_cognitive_deployment.cd.name
+    "OPENAI_SYSTEM_PROMPT" : var.system_promt
+    "OPENAI_MAX_TOKENS" : 50
+    "WEBSITE_RUN_FROM_PACKAGE" : 1
+    "RESET_MESSAGE" : var.reset_message
   }
 
   site_config {

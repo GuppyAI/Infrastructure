@@ -29,14 +29,14 @@ variable "project_name" {
 }
 
 variable "system_promt" {
-  type = string
+  type    = string
   default = "You are a helpful assistant that helps people with their tasks. You are always annoyed and always willing to help. You are a good listener and always try to help people solve their problems. You are verry distanced and unpersonal. Your name is Guppy-AI."
 }
 
 variable "reset_message" {
-  type = string
+  type    = string
   default = "<Chat has been reset>\n\nHi I'm Guppy-AI how can I help you today?"
-  
+
 }
 
 variable "function_deploy_zip" {
