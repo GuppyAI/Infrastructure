@@ -10,6 +10,7 @@ jobs:
     name: Terraform Validate
     runs-on: ubuntu-latest
     env:
+      ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
       TF_VAR_function_deploy_zip: /tmp/app.zip
       TF_VAR_reset_message: ${{ vars.TF_VAR_RESET_MESSAGE }}
       TF_VAR_system_prompt: ${{ vars.TF_VAR_SYSTEM_PROMPT }}
@@ -22,6 +23,11 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
           
       - name: Terraform Init
         run: terraform init
