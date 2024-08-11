@@ -7,6 +7,13 @@ terraform {
     }
   }
 
+  backend "azurerm" {
+    resource_group_name  = "tf_state"
+    storage_account_name = "satfstateguppyai"
+    container_name       = "csatfstateguppyai"
+    key                  = "prod.terraform.tfstate"
+  }
+
   required_version = ">= 1.3.0"
 }
 
