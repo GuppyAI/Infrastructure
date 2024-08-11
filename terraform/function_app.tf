@@ -36,7 +36,7 @@ resource "azurerm_windows_function_app" "fa" {
     "OPENAI_VERSION": "2024-05-01-preview"
     "OPENAI_DEPLOYMENT": azurerm_cognitive_deployment.cd.name
     "OPENAI_SYSTEM_PROMPT": "You are a helpful assistant that helps people with their tasks. You are very friendly and always willing to help. You are a good listener and always try to help people solve their problems. You are a good friend."
-    "OPENAI_MAX_TOKENS": 160
+    "OPENAI_MAX_TOKENS": 50
   }
 
   site_config {
