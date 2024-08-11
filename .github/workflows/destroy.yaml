@@ -8,9 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
+      TF_VAR_function_deploy_zip: /tmp/app.zip
+      TF_VAR_reset_message: ${{ vars.TF_VAR_RESET_MESSAGE }}
+      TF_VAR_system_prompt: ${{ vars.TF_VAR_SYSTEM_PROMPT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Download latest Release
+        run: wget "${{env.RELEASE_FILE}}" -O /tmp/app.zip
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3

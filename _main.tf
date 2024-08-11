@@ -43,11 +43,9 @@ variable "system_promt" {
 variable "reset_message" {
   type    = string
   default = "<Chat has been reset>\n\nHi I'm Guppy-AI how can I help you today?"
-
 }
 
 variable "function_deploy_zip" {
   type    = string
-  default = "https://github.com/GuppyAI/Azure-Functions/releases/latest/download/app.zip"
+  default = null
 }
-
