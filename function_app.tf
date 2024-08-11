@@ -23,7 +23,7 @@ resource "azurerm_windows_function_app" "fa" {
   storage_account_access_key = azurerm_storage_account.sa_fa.primary_access_key
   service_plan_id            = azurerm_service_plan.sp_fa.id
 
-  zip_deploy_file = "https://github.com/GuppyAI/Azure-Functions/releases/latest/download/app.zip"
+  zip_deploy_file = var.function_deploy_zip
 
   app_settings = {
     "INGRESS_QUEUE" : azurerm_servicebus_queue.sb_q_ingress.name
@@ -37,9 +37,10 @@ resource "azurerm_windows_function_app" "fa" {
     "OPENAI_KEY": azurerm_cognitive_account.ca.primary_access_key
     "OPENAI_VERSION": "2024-05-01-preview"
     "OPENAI_DEPLOYMENT": azurerm_cognitive_deployment.cd.name
-    "OPENAI_SYSTEM_PROMPT": "You are a helpful assistant that helps people with their tasks. You are very friendly and always willing to help. You are a good listener and always try to help people solve their problems. You are a good friend."
+    "OPENAI_SYSTEM_PROMPT": var.system_promt
     "OPENAI_MAX_TOKENS": 50
     "WEBSITE_RUN_FROM_PACKAGE": 1
+    "RESET_MESSAGE": var.reset_message
   }
 
   site_config {
