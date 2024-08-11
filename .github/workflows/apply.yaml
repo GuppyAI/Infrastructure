@@ -1,12 +1,14 @@
-name: Plan Terraform
+name: Apply Terraform
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
-  plan:
-    name: Terraform Plan
+  apply:
+    name: Terraform Apply
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,5 +25,5 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Plan
-        run: terraform plan
+      - name: Terraform Apply
+        run: terraform apply --auto-approve=true
