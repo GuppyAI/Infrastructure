@@ -10,7 +10,7 @@ resource "azurerm_service_plan" "sp_fa" {
   name                = "sp-fa-${var.project_name}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  os_type             = "Windows"
+  os_type             = "Linux"
   sku_name            = "Y1"
 }
 
