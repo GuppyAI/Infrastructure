@@ -42,3 +42,9 @@ The pipeline can be configured with the following environment variables:
 Additionally, the pipeline requires the following secrets:
 - ARM_SAS_TOKEN: The SAS token for the Azure Blob Storage Account to store the Terraform state
 - AZURE_CREDENTIALS: The Azure credentials to authenticate the Azure CLI
+
+## Copyright
+
+GuppyAI SMS-Gateway (c) 2024 Kay Knöpfle and contributors
+
+SPDX-License-Identifier: GPL-3.0
